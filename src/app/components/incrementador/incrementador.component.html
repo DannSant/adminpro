@@ -1,0 +1,20 @@
+
+<h3>{{leyenda}} - {{porcentaje}}</h3>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-primary" type="button" (click)="cambiarValor(-5)"><i class="mdi mdi-minus"></i></button>
+  </div>
+  <input type="number"
+         class="form-control"
+         aria-describedby="basic-addon1"
+         name="porcentaje"
+         [(ngModel)]="porcentaje"
+         (ngModelChange)="onChange($event)"
+         #txtPorcentaje
+         min="1"
+         max="100"
+         >
+  <div class="input-group-append">
+    <button class="btn btn-outline-primary" type="button" (click)="cambiarValor(5)"><i class="mdi mdi-plus"></i> </button>
+  </div>
+</div>
