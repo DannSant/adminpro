@@ -13,6 +13,7 @@ import {SharedModule} from '../shared/shared.module'
 import {PAGES_ROUTING} from './pages.routes'
 
 import { ChartsModule } from 'ng2-charts';
+import { AcountSettingsComponent } from './acount-settings/acount-settings.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { ChartsModule } from 'ng2-charts';
     ProgressComponent,
     PagesComponent,
     IncrementadorComponent,
-    GraficoDonaComponent
+    GraficoDonaComponent,
+    AcountSettingsComponent
   ],
   exports: [
     DashboardComponent,

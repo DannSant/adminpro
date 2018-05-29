@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import {PagesModule} from './pages/pages.module';
 import {FormsModule} from '@angular/forms'
 import { ChartsModule } from 'ng2-charts';
+import {RouterModule} from '@angular/router'
 
 //COMPONENTS
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { RegisterComponent } from './login/register.component';
 
 //RUTAS
 import {APP_ROUTING} from './app.routes';
+import { ServiceModule } from './services/service.module';
 
 //import { IncrementadorComponent } from './components/incrementador/incrementador.component';
 
@@ -32,7 +34,9 @@ import {APP_ROUTING} from './app.routes';
     APP_ROUTING,
     PagesModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    ServiceModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
