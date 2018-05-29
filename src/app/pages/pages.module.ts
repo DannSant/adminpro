@@ -14,6 +14,8 @@ import {PAGES_ROUTING} from './pages.routes'
 
 import { ChartsModule } from 'ng2-charts';
 import { AcountSettingsComponent } from './acount-settings/acount-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { AcountSettingsComponent } from './acount-settings/acount-settings.compo
     PagesComponent,
     IncrementadorComponent,
     GraficoDonaComponent,
-    AcountSettingsComponent
+    AcountSettingsComponent,
+    PromesasComponent,
+    RxjsComponent
   ],
   exports: [
     DashboardComponent,
