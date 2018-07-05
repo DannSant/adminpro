@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 //modulos
 import {PagesModule} from './pages/pages.module';
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { ChartsModule } from 'ng2-charts';
 import {RouterModule} from '@angular/router'
 
@@ -36,7 +36,8 @@ import { ServiceModule } from './services/service.module';
     FormsModule,
     ChartsModule,
     ServiceModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
