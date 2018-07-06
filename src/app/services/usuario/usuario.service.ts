@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable()
 export class UsuarioService {
@@ -12,7 +13,10 @@ export class UsuarioService {
   usuario:Usuario;
   token:string;
 
-  constructor(public http:HttpClient, public router:Router) {
+  constructor(public http:HttpClient, 
+              public router:Router,
+              public _subirArchivoService:SubirArchivoService
+            ) {
     this.cargarStorage();
    }
 
@@ -76,6 +80,53 @@ export class UsuarioService {
       Swal("Usuario creado", usuario.email,"success")
     });
    }
+
+   actualizarUsuario(usuario:Usuario){
+     let url = URL_SERVICIOS+"/user/"+usuario._id;
+     url +="?" + this.token;
+     return this.http.put(url,usuario).map((resp:any)=>{
+       if(usuario._id === this.usuario._id){
+        let usuarioDB = resp.usuario
+        this.guardarStorage(usuarioDB._id,this.token,usuarioDB);
+       }
+       
+       Swal("Usuario actualizado", usuario.email,"success");
+       return true;
+     })
+   }
+
+   cambiarImagen(file:File,id:string){
+    this._subirArchivoService.subirArchivo(file,"usuarios",id)
+      .then((resp:any)=>{
+        this.usuario.img = resp.usuario.img;
+        Swal("Imagen actualizada", this.usuario.nombre,"success");
+        this.guardarStorage(id,this.token,this.usuario);
+      })
+      .catch((error)=>{
+
+      })
+   }
+
+   
+  cargarUsuarios(desde:number=0){
+    let url = URL_SERVICIOS + "/user?desde=" + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuario(termino:string){
+    let url = URL_SERVICIOS + "/search/coleccion/usuarios/" + termino;
+    return this.http.get(url).map((resp:any)=>{
+      return resp.usuarios;
+    });
+  }
+
+  borarUsuario(id:string){
+    let url =URL_SERVICIOS + '/user/'+id+"?token=" + this.token;
+    return this.http.delete(url).map((resp)=>{
+      Swal('Eliminado!','El usuario fue borrado con exito','success');
+      return true;
+    });
+  }
 
    
 
