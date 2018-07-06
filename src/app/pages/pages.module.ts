@@ -17,13 +17,18 @@ import { AcountSettingsComponent } from './acount-settings/acount-settings.compo
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
+//Pipes
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     PAGES_ROUTING,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule
   ],
   declarations: [
     DashboardComponent,
@@ -34,7 +39,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     GraficoDonaComponent,
     AcountSettingsComponent,
     PromesasComponent,
-    RxjsComponent
+    RxjsComponent,
+    ProfileComponent,
+    
   ],
   exports: [
     DashboardComponent,

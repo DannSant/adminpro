@@ -16,6 +16,7 @@ import { RegisterComponent } from './login/register.component';
 import {APP_ROUTING} from './app.routes';
 import { ServiceModule } from './services/service.module';
 
+
 //import { IncrementadorComponent } from './components/incrementador/incrementador.component';
 
 
@@ -26,6 +27,7 @@ import { ServiceModule } from './services/service.module';
     AppComponent,
     LoginComponent,
     RegisterComponent
+    
 
 
   ],
