@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import Swal from 'sweetalert2'
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UsuarioService {
@@ -11,7 +12,7 @@ export class UsuarioService {
   usuario:Usuario;
   token:string;
 
-  constructor(public http:HttpClient) {
+  constructor(public http:HttpClient, public router:Router) {
     this.cargarStorage();
    }
 
@@ -37,15 +38,24 @@ export class UsuarioService {
     this.token=token;
    }
 
+  logout(){
+    this.usuario=null;
+    this.token="";
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    this.router.navigate(['/login']);
+  }
+
    loginGoogle(token:string){
+     console.log(token);
     let url = URL_SERVICIOS+"/login/google";
     return this.http.post(url,{token}).map((resp:any)=>{
-      this.guardarStorage(resp.id,resp.token,resp.usuario);   
+      this.guardarStorage(resp.usuario._id,resp.token,resp.usuario);   
       return true;
      });
    }
 
-   login(usuario:Usuario,recordar:boolean){
+  login(usuario:Usuario,recordar:boolean){
      if(recordar){
        localStorage.setItem('email',usuario.email);
      }else {
@@ -53,10 +63,12 @@ export class UsuarioService {
      }
      let url = URL_SERVICIOS + "/login";
      return this.http.post(url,usuario).map((resp:any)=>{
-      this.guardarStorage(resp.id,resp.token,resp.usuario);   
+      this.guardarStorage(resp.usuario._id,resp.token,resp.usuario);   
       return true;
      });
   }
+
+  
 
    crearUsuario(usuario:Usuario){
     let url= URL_SERVICIOS +"/user";
