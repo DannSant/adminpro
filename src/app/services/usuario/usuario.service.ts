@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import 'rxjs/add/operator/map';
 import Swal from 'sweetalert2'
@@ -32,6 +32,7 @@ export class UsuarioService {
        this.token = "";
        this.usuario=null;
      }
+     
    }
 
    guardarStorage(id:string,token:string,usuario:Usuario){
@@ -82,11 +83,16 @@ export class UsuarioService {
    }
 
    actualizarUsuario(usuario:Usuario){
+     
      let url = URL_SERVICIOS+"/user/"+usuario._id;
-     url +="?" + this.token;
-     return this.http.put(url,usuario).map((resp:any)=>{
+     let headers = new HttpHeaders({
+      'token':this.token
+    })
+     return this.http.put(url,usuario,{headers}).map((resp:any)=>{
+      
        if(usuario._id === this.usuario._id){
-        let usuarioDB = resp.usuario
+         console.log(resp);
+        let usuarioDB = resp.data
         this.guardarStorage(usuarioDB._id,this.token,usuarioDB);
        }
        
@@ -98,6 +104,7 @@ export class UsuarioService {
    cambiarImagen(file:File,id:string){
     this._subirArchivoService.subirArchivo(file,"usuarios",id)
       .then((resp:any)=>{
+        console.log(resp);
         this.usuario.img = resp.usuario.img;
         Swal("Imagen actualizada", this.usuario.nombre,"success");
         this.guardarStorage(id,this.token,this.usuario);
@@ -109,20 +116,32 @@ export class UsuarioService {
 
    
   cargarUsuarios(desde:number=0){
-    let url = URL_SERVICIOS + "/user?desde=" + desde;
-    return this.http.get(url);
+    let url = URL_SERVICIOS + "/user?desde=" + desde + "&limite=5";
+    let headers = new HttpHeaders({
+      'Content-type':'application-json',
+      'token':this.token
+    })
+  
+    return this.http.get(url,{headers});
   }
 
   buscarUsuario(termino:string){
-    let url = URL_SERVICIOS + "/search/coleccion/usuarios/" + termino;
-    return this.http.get(url).map((resp:any)=>{
-      return resp.usuarios;
+    let url = URL_SERVICIOS + "/search/collection/usuario/" + termino;
+    let headers = new HttpHeaders({
+      'Content-type':'application-json',
+      'token':this.token
+    })
+    return this.http.get(url,{headers}).map((resp:any)=>{
+      return resp.data.usuarios;
     });
   }
 
   borarUsuario(id:string){
-    let url =URL_SERVICIOS + '/user/'+id+"?token=" + this.token;
-    return this.http.delete(url).map((resp)=>{
+    let url =URL_SERVICIOS + '/user/'+id;
+    let headers = new HttpHeaders({
+      'token':this.token
+    })
+    return this.http.delete(url,{headers}).map((resp)=>{
       Swal('Eliminado!','El usuario fue borrado con exito','success');
       return true;
     });
