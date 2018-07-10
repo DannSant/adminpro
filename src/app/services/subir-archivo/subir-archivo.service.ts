@@ -17,15 +17,21 @@ export class SubirArchivoService {
   
       xhr.onreadystatechange = function(){
         if(xhr.readyState===4){
-          if(xhr.status==200){
-            console.log("imagen subida",xhr.response);
-            console.log(JSON.parse(xhr.response));
-            console.log(xhr);
+          if(xhr.status===200){
+             console.log("imagen subida");           
             resolve(JSON.parse(xhr.response));
           }
         }else {
-          console.log("fallo la subida");
-            //reject(xhr.response);
+          if(xhr.response!=''){
+           
+            // console.log(xhr);
+            // console.log(xhr.response);
+            // console.log(xhr.status);
+            if(xhr.status!=200){
+              console.log("fallo la subida");
+              //reject(xhr.response);
+            }           
+          }         
         }
       };
       let url=URL_SERVICIOS +'/upload/'+tipo+'/'+id;
