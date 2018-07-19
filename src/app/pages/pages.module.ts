@@ -11,14 +11,14 @@ import { ChartsModule } from 'ng2-charts';
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {Graficas1Component} from './graficas1/graficas1.component'
 import {ProgressComponent} from './progress/progress.component'
-import { PagesComponent } from './pages.component';
+//import { PagesComponent } from './pages.component';
 import {IncrementadorComponent} from '../components/incrementador/incrementador.component'
 import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
 import { AcountSettingsComponent } from './acount-settings/acount-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+//import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
 
 
 //Pipes
@@ -34,7 +34,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    //BrowserModule,
     SharedModule,
     PAGES_ROUTING,
     FormsModule,
@@ -46,7 +46,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     DashboardComponent,
     Graficas1Component,
     ProgressComponent,
-    PagesComponent,
+    //PagesComponent,
     IncrementadorComponent,
     GraficoDonaComponent,
     AcountSettingsComponent,
@@ -54,7 +54,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     RxjsComponent,
     ProfileComponent,
     UsuariosComponent,
-    ModalUploadComponent,
+    //ModalUploadComponent,
     HospitalesComponent,
     MedicosComponent,
     MedicoComponent,
@@ -64,10 +64,10 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     DashboardComponent,
     Graficas1Component,
     ProgressComponent,
-    PagesComponent,
+    
     IncrementadorComponent,
     GraficoDonaComponent,
-    ModalUploadComponent
+    //ModalUploadComponent
   ],
   providers: []
 })

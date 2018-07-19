@@ -24,6 +24,24 @@ export class UsuarioService {
     this.cargarStorage();
    }
 
+   renuevaToken(){
+     let url = URL_SERVICIOS + "/renuevaToken";
+     let headers = new HttpHeaders({
+      'token':this.token
+     });
+
+     return this.http.get(url,{headers}).map((resp:any)=>{      
+       this.guardarStorage(this.usuario._id,resp.token,this.usuario,this.menu);
+       return true;
+     }).catch((e)=>{
+      let errorMessage= e.error.error.message;       
+      Swal('Error al renovar token ',errorMessage,"error")
+      this.logout();
+     return Observable.throw (e);
+     
+    });
+   }
+
    estaLoggeado(){
      return this.token.length>5;
    }
